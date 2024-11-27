@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Welcome to <%=shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1><%=shopName%></h1>
+    <ul>
+        <% for(let i = 0; i < products.length; i++) { %>
+            <li><%= products[i].name %>, $<%= products[i].price %></li>
+          <% } %> 
+    </ul> 
+  </body>
+</html>
