@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Portfolio Project</title>
+  </head>
+  <body>
+    <h1>Register your account</h1>
+
+
+    <% if (repeat) { %>
+        <p>Your email or password was incorrect. Please try again.</p>
+        <% } %>
+    <form method="POST" action="/loggedin">
+        <p>Email: <input id="email" type="email" name="email" /></p>
+        <p>Password: <input id="password" type="password" name="password" /></p>
+        <input type="submit" value="Login In" />
+    </form>
+    </body>
+</html>

@@ -46,6 +46,50 @@ router.post('/registered', function (req,res) {
     });
 }); 
 
+router.get('/login',(req,res) => {
+    let newData = Object.assign({}, shopData, {repeat:false});
+    res.render("login.ejs", newData);
+ });
+
+ router.get('/retrylogin',(req,res) => {
+    let newData = Object.assign({}, shopData, {repeat:true});
+    res.render("login.ejs", newData);
+ });
+
+ router.post('/loggedin', function (req,res) {
+    // saving data in database
+    let sqlquery = "SELECT * FROM users WHERE email = ?";
+    // execute sql query
+    let newrecord = [req.body.email];
+    db.query(sqlquery, newrecord, (err, result) => {
+    if (err) {
+        return console.error(err.message);
+    }
+    else {
+        if (result.length != 0 && result[0].password == req.body.password) {
+            let sqlquery2 = "SELECT * FROM products WHERE user_id = ?";
+            // execute sql query
+            console.log(result[0].id);
+            let keyword = [result[0].id];
+        
+            db.query(sqlquery2, keyword, (err, books) => {
+            if (err) {
+                res.redirect('./'); 
+            } else {
+                let newData = Object.assign({}, shopData, {id:result[0].id}, {products:books});
+                res.render("loggedin.ejs", newData);
+            }
+            });
+        }
+        else {
+            res.redirect("/retrylogin");
+        }
+    }
+    });
+}); 
+
+
+
 router.post('/productadded', function (req,res) {
     // saving data in database
     let sqlquery = "INSERT INTO products (user_id, name, description, price) VALUES (?,?,?,?)";

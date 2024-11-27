@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%=shopName%>: Profile</title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1><%=shopName%>: Profile</h1>
+
+        <h2>SUCCESS! you are logged in.</h2>
+
+        <ul>
+            <% if (products.length == 0) { %>
+                <h2>You have no products listed</h2>
+            <% } else { %>
+                    <% for(let i = 0; i < products.length; i++) { %>
+                <li><%= products[i].name %>, $<%= products[i].price %>, <%= products[i].product_id %></li>
+              <% }} %> 
+        </ul> 
+
+
+        <a href="login">log out</a>
+
+  </body>
+</html>
