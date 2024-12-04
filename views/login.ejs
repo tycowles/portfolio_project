@@ -2,18 +2,53 @@
 <html>
   <head>
     <title>Portfolio Project</title>
+    <style type="text/css">
+      .form {
+          margin-left: auto;
+          margin-right: auto;
+          justify-content: center;
+          background-color: rgb(235, 235, 235);
+          width: 500px;
+          align-items: center;
+          padding: 50px;
+          margin-top: 100px;
+          border-radius: 2rem;
+          text-align: center;
+          
+      }
+
+      .error_message {
+        color: red;
+      }
+
+      .forminput {
+          margin-left: auto;
+          margin-right: auto;
+          justify-content: center;
+          /* background-color: rgb(2, 2, 2); */
+          align-items: center;
+          
+      }
+
+  </style>
   </head>
   <body>
-    <h1>Register your account</h1>
-
-
-    <% if (repeat) { %>
-        <p>Your email or password was incorrect. Please try again.</p>
-        <% } %>
-    <form method="POST" action="/loggedin">
-        <p>Email: <input id="email" type="email" name="email" /></p>
-        <p>Password: <input id="password" type="password" name="password" /></p>
-        <input type="submit" value="Login In" />
-    </form>
+    <%- include('index.ejs') %>
+      <div class="form"> 
+          <h2>Log into your account</h2>
+          <div class="error_message">
+              <% if (repeat) { %>
+                <p>Your email or password was incorrect. Please try again.</p>
+              <% } %>
+          </div>
+          <div class="forminput">
+            <form method="POST" action="/loggedin">
+                <p>Email: <input id="email" type="email" name="email" /></p>
+                <p>Password: <input id="password" type="password" name="password" /></p>
+                <input type="submit" value="Login In" />
+            </form>
+          </div>
+       </div>
+    
     </body>
 </html>

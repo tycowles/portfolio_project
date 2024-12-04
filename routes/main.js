@@ -76,7 +76,7 @@ router.get('/login',(req,res) => {
             if (err) {
                 res.redirect('./'); 
             } else {
-                let newData = Object.assign({}, shopData, {id:result[0].id}, {products:books});
+                let newData = Object.assign({}, shopData, {user:result[0]}, {products:books});
                 res.render("loggedin.ejs", newData);
             }
             });

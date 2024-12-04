@@ -9,19 +9,30 @@
         display: block;
         color: #000000;
         text-align: center;
-        padding: 15px 15px;
         font-size: 20px;
+        text-decoration: none;
+        padding-right: 15px;
       }
 
-      .navbar a:hover {
+      /* .navbar a:hover {
         background: #fbefd3;
-        color: rgb(35, 72, 35);
-      }
+        color: rgb(94, 140, 199);
+      } */
 
       header {
-        background: rgb(35, 72, 35);
+        background: rgb(77, 111, 156);
         padding: 48px;
-        color: #fbefd3;
+        color: #000000;
+      }
+
+      .logo {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        font-size: 30px;
+        margin-right: 10%;
+      }
+      .bar {
+        display: flex;
       }
         
     </style>
@@ -29,16 +40,18 @@
     <title>Portfolio Project</title>
   </head>
   <body>
-    <h1>Welcome to the beginning of my Portfolio Project</h1>
-
     <header>
-      <div class="navbar">
-        <a href="about">About</a>
-        <!-- <p><a href="search">Search for books</a></p> -->
-        <a href="register">Register with us</a>
-        <a href="addProduct">Add a product</a>
-        <a href="showProduct">Show products</a>
-        <a href="login">login</a>
+      <div class="bar">
+        <div class="logo">
+          Hand-Me-Down Uni
+        </div>
+        <div class="navbar">
+          <a href="about">Home</a>
+          <a href="register">Sign Up</a>
+          <a href="login">Sign In</a>
+          <a href="showProduct">Search for products</a>
+          
+        </div>
       </div>
     </header>
 

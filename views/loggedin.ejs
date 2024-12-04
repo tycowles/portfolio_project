@@ -2,13 +2,60 @@
 <html>
   <head>
     <title><%=shopName%>: Profile</title>
-    <link rel="stylesheet"  type="text/css" href="/main.css" />
+    <style type="text/css">
+            
+      .navbar {
+        /* float: left; */
+        /* display: block; */
+        
+        text-align: center;
+        padding: 10px 10px;
+        font-size: 20px;
+        background: #e3e3e3;
+        border-radius: 2rem; 
+        position: absolute;
+        right: 7.5%;
+        top: 5%;
+        /* margin-top: 5%; */
+        /* margin-bottom: auto; */
+        width: auto;
+        text-decoration: none;
+        color: #000000;
+        display: flex;
+      }
+
+      .logo {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        font-size: 30px;
+      }
+
+
+
+      header {
+        background: rgb(77, 111, 156);
+        padding: 40px;
+        color: #000000;
+      }
+        
+    </style>
   </head>
   <body>
-    <h1><%=shopName%>: Profile</h1>
+
+    <header>
+      <div class="logo">
+        Hand-Me-Down Uni
+      </div>
+      <div class="navbar">
+        <a href="login">Log Out</a>
+        
+      </div>
+    </header>
+    <h1> Welxome <%=user.email%></h1>
 
         <h2>SUCCESS! you are logged in.</h2>
 
+        Your current listings: 
         <ul>
             <% if (products.length == 0) { %>
                 <h2>You have no products listed</h2>
@@ -19,7 +66,6 @@
         </ul> 
 
 
-        <a href="login">log out</a>
-
+        
   </body>
 </html>
