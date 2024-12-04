@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
-var shopData = {shopName: "Bertie's Books"}
+var data = {companyName: "Uni-Helper"}
 
 
 // Handle the main routes
@@ -11,23 +11,19 @@ router.get('/',(req,res) => {
  });
 
 router.get('/about',function(req,res){
-    res.render('about.ejs', shopData);
+    res.render('about.ejs', data);
 });
-
-// router.get('/search',function(req,res){
-//     res.render("search.ejs", shopData);
-// });
 
  router.get('/register',(req,res) => {
     res.render('register.ejs')
  });
 
 router.get('/addProduct', function (req,res) {
-    res.render('addProduct.ejs', shopData);                                                                     
+    res.render('addProduct.ejs', data);                                                                     
 }); 
   
 router.get('/showProduct', function (req,res) {
-    res.render('showProduct.ejs', shopData);                                                                     
+    res.render('showProduct.ejs', data);                                                                     
 }); 
   
 router.post('/registered', function (req,res) {
@@ -47,12 +43,12 @@ router.post('/registered', function (req,res) {
 }); 
 
 router.get('/login',(req,res) => {
-    let newData = Object.assign({}, shopData, {repeat:false});
+    let newData = Object.assign({}, data, {repeat:false});
     res.render("login.ejs", newData);
  });
 
  router.get('/retrylogin',(req,res) => {
-    let newData = Object.assign({}, shopData, {repeat:true});
+    let newData = Object.assign({}, data, {repeat:true});
     res.render("login.ejs", newData);
  });
 
@@ -76,7 +72,7 @@ router.get('/login',(req,res) => {
             if (err) {
                 res.redirect('./'); 
             } else {
-                let newData = Object.assign({}, shopData, {user:result[0]}, {products:books});
+                let newData = Object.assign({}, data, {user:result[0]}, {products:books});
                 res.render("loggedin.ejs", newData);
             }
             });
@@ -92,16 +88,16 @@ router.get('/login',(req,res) => {
 
 router.post('/productadded', function (req,res) {
     // saving data in database
-    let sqlquery = "INSERT INTO products (user_id, name, description, price) VALUES (?,?,?,?)";
+    let sqlquery = "INSERT INTO products (user_id, name, price) VALUES (?,?,?)";
     // execute sql query
-    let newrecord = [req.body.user_id, req.body.name, req.body.description, req.body.price];
+    let newrecord = [req.body.user_id, req.body.name, req.body.price];
     db.query(sqlquery, newrecord, (err, result) => {
       if (err) {
         return console.error(err.message);
       }
       else {
-        res.send(' This product is added to database, name: '
-                  + req.body.name + ' description '+ req.body.description + ' price '+ req.body.price);
+        console.log("success!");
+        return;
       }
     });
 }); 
@@ -136,7 +132,7 @@ router.post('/productadded', function (req,res) {
         res.redirect('./'); 
       }
       //res.send(result)
-      let newData = Object.assign({}, shopData, {products:result});
+      let newData = Object.assign({}, data, {products:result});
         console.log(newData)
         res.render("showResult.ejs", newData)
     });

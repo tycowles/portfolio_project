@@ -14,6 +14,7 @@
           margin-top: 100px;
           border-radius: 2rem;
           text-align: center;
+          margin-bottom: 10%;
           
       }
 
@@ -30,12 +31,50 @@
           
       }
 
+      .form {
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+            background-color: rgb(235, 235, 235);
+            width: 500px;
+            align-items: center;
+            padding: 50px;
+            margin-top: 100px;
+            border-radius: 2rem;
+            text-align: center;
+            margin-bottom: 10%;
+        }
+
+      .field {
+        margin: 0;
+      }
+
+      p {
+        margin-bottom: 0;
+        text-align: left;
+      }
+
+      .content {
+        width: 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+      }
+      input {
+        width: 100%;
+        padding: 10px 15px;
+      }
+
+      .submit {
+        margin-top: 10%;
+      }
+
   </style>
   </head>
   <body>
     <%- include('index.ejs') %>
       <div class="form"> 
           <h2>Log into your account</h2>
+          <div class="content">
           <div class="error_message">
               <% if (repeat) { %>
                 <p>Your email or password was incorrect. Please try again.</p>
@@ -43,12 +82,28 @@
           </div>
           <div class="forminput">
             <form method="POST" action="/loggedin">
-                <p>Email: <input id="email" type="email" name="email" /></p>
-                <p>Password: <input id="password" type="password" name="password" /></p>
-                <input type="submit" value="Login In" />
+                    <div class="field">
+                        <p>Email: </p>
+                        <input id="email" type="email" name="email" placeholder="yourname@mail.com" required/>
+                    </div>
+
+                    <div class="field">
+                        <p>Password: </p>
+                        <input id="password" type="password" name="password" placeholder="********" required/>
+                    </div>
+
+                    <div class="submit">
+                        <input type="submit" value="Register" />
+                    </div>
+                
             </form>
+            </div>
+            <a href="register">Don't have an account?</a>
           </div>
        </div>
+
+
+       <%- include('footer.ejs') %>
     
     </body>
 </html>

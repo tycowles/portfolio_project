@@ -14,6 +14,7 @@
             margin-top: 100px;
             border-radius: 2rem;
             text-align: center;
+            margin-bottom: 10%;
         }
 
       .error_message {
@@ -29,18 +30,72 @@
           
       }
 
+      .field {
+        margin: 0;
+      }
+
+      p {
+        margin-bottom: 0;
+        text-align: left;
+      }
+
+      .content {
+        width: 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+      }
+      input {
+        width: 100%;
+        padding: 10px 15px;
+      }
+
+      .submit {
+        margin-top: 10%;
+      }
+
     </style>
   </head>
   <body>
     <%- include('index.ejs') %>
     
     <div class="form">
-        <h2>Register your account</h2>
-        <form method="POST" action="/registered">
-            <p>Email: <input id="email" type="email" name="email" /></p>
-            <p>Password: <input id="password" type="password" name="password" /></p>
-            <input type="submit" value="Register" />
-        </form>
+        <div class="content">
+            <h2>Register your account</h2>
+            <p>This is a fictitious please do not submit
+            personal or sensitive information.
+            </p>
+            <form method="POST" action="/registered">
+                
+                <div class="field">
+                    <p>Name: </p>
+                    <input id="name" type="text" name="name" placeholder="John" required/>
+                </div>
+                
+                <div class="field">
+                    <p>Surname: </p>
+                    <input id="surname" type="text" name="surname" placeholder="Doe" required/>
+                </div>
+                <div class="field">
+                    <p>Email: </p>
+                    <input id="email" type="email" name="email" placeholder="yourname@mail.com" required/>
+                </div>
+
+                <div class="field">
+                    <p>Password: </p>
+                    <input id="password" type="password" name="password" placeholder="********" required/>
+                </div>
+
+                <div class="submit">
+                    <input type="submit" value="Register" />
+                </div>
+
+            </form>
+            
+        </div>
     </div>
+
+
+
+    <%- include('footer.ejs') %>
     </body>
 </html>
