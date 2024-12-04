@@ -5,7 +5,7 @@ const router = express.Router();
 var data = {companyName: "Uni-Helper"}
 
 
-// Handle the main routes
+// Handle the routes
 router.get('/',(req,res) => {
     res.render('index.ejs')
  });
@@ -45,44 +45,50 @@ router.post('/registered', function (req,res) {
 router.get('/login',(req,res) => {
     let newData = Object.assign({}, data, {repeat:false});
     res.render("login.ejs", newData);
- });
+});
 
- router.get('/retrylogin',(req,res) => {
+router.get('/retrylogin',(req,res) => {
     let newData = Object.assign({}, data, {repeat:true});
     res.render("login.ejs", newData);
- });
+});
 
- router.post('/loggedin', function (req,res) {
+router.post('/loggedin', function (req,res) {
     // saving data in database
     let sqlquery = "SELECT * FROM users WHERE email = ?";
     // execute sql query
     let newrecord = [req.body.email];
     db.query(sqlquery, newrecord, (err, result) => {
-    if (err) {
-        return console.error(err.message);
-    }
-    else {
+      if (err) {
+          return console.error(err.message);
+      }
+      else {
         if (result.length != 0 && result[0].password == req.body.password) {
-            let sqlquery2 = "SELECT * FROM products WHERE user_id = ?";
-            // execute sql query
-            console.log(result[0].id);
-            let keyword = [result[0].id];
-        
-            db.query(sqlquery2, keyword, (err, books) => {
-            if (err) {
-                res.redirect('./'); 
-            } else {
-                let newData = Object.assign({}, data, {user:result[0]}, {products:books});
-                res.render("loggedin.ejs", newData);
-            }
-            });
+          res.redirect("/showPage?user_id=" + result[0].id);
         }
         else {
-            res.redirect("/retrylogin");
-        }
-    }
+          res.redirect("/retrylogin");
+        } 
+      }
     });
 }); 
+
+router.get('/showPage', function (req,res) {
+    
+    let sqlquery2 = "SELECT * FROM products WHERE user_id = ?";
+    // execute sql query
+    console.log(req.query.user_id);
+    let keyword = [req.query.user_id];
+
+    db.query(sqlquery2, keyword, (err, books) => {
+        if (err) {
+            res.redirect('./'); 
+        } else {
+            let newData = Object.assign({}, data, {user_id:req.query.user_id}, {products:books});
+            res.render("loggedin.ejs", newData);
+        }
+    });                                                            
+}); 
+  
 
 
 
@@ -97,7 +103,7 @@ router.post('/productadded', function (req,res) {
       }
       else {
         console.log("success!");
-        return;
+        res.redirect("/showPage?user_id=" + req.body.user_id);
       }
     });
 }); 

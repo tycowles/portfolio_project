@@ -59,7 +59,6 @@
       </div>
     </header>
     <div class="content">
-      <h1> Welcome <%=user.email%></h1>
 
 
           Your current listings: 
@@ -76,7 +75,7 @@
           <div class="form">
             <h1>Student swap shop: Add product</h1>
             <form action="/productadded" method="POST">
-              <p> <input id="user_id" type="text" name="user_id" value="<%=user.id%>" hidden></p>
+              <p> <input id="user_id" type="text" name="user_id" value="<%=user_id%>" hidden></p>
               <p> Product name: <input id="name" type="text" name="name"> </p>
               <p> Description: <input id="description" type="text" name="description"> </p>
               <p>Price: <input id="price" type="text" name="price" ></p>
