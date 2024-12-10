@@ -1,58 +1,57 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Portfolio Project</title>
-    <style type="text/css">
-        .form {
-            margin-left: auto;
-            margin-right: auto;
-            justify-content: center;
-            background-color: rgb(235, 235, 235);
-            width: 500px;
-            align-items: center;
-            padding: 50px;
-            margin-top: 100px;
-            border-radius: 2rem;
-            text-align: center;
-            margin-bottom: 10%;
-        }
+    <head>
+        <title>Portfolio Project</title>
+        <style type="text/css">
+            .form {
+                margin-left: auto;
+                margin-right: auto;
+                justify-content: center;
+                background-color: rgb(235, 235, 235);
+                width: 500px;
+                align-items: center;
+                padding: 50px;
+                margin-top: 100px;
+                border-radius: 2rem;
+                text-align: center;
+                margin-bottom: 10%;
+            }
 
-        .error_message {
-            color: red;
-        }
+            .error_message {
+                color: red;
+            }
 
-        .forminput {
-            margin-left: auto;
-            margin-right: auto;
-            justify-content: center;
-            align-items: center;
-            
-        }
+            .forminput {
+                margin-left: auto;
+                margin-right: auto;
+                justify-content: center;
+                align-items: center;
+                
+            }
 
-        .field {
-            margin: 0;
-        }
+            .field {
+                margin: 0;
+            }
 
-        p {
-            margin-bottom: 0;
-            text-align: left;
-        }
+            p {
+                margin-bottom: 0;
+                text-align: left;
+            }
 
-        .content {
-            width: 50%;
-            margin-left: 25%;
-            margin-right: 25%;
-        }
-        input {
-            width: 100%;
-            padding: 10px 15px;
-        }
+            .content {
+                width: 50%;
+                margin-left: 25%;
+                margin-right: 25%;
+            }
+            input {
+                width: 100%;
+                padding: 10px 15px;
+            }
 
-        .submit {
-            margin-top: 10%;
-        }
-
-    </style>
+            .submit {
+                margin-top: 10%;
+            }
+        </style>
   </head>
   <body>
     <%- include('index.ejs') %>
@@ -67,13 +66,9 @@
                 
                 <div class="field">
                     <p>Name: </p>
-                    <input id="name" type="text" name="name" placeholder="John" required/>
+                    <input id="name" type="text" name="name" placeholder="John Doe" required/>
                 </div>
-                
-                <div class="field">
-                    <p>Surname: </p>
-                    <input id="surname" type="text" name="surname" placeholder="Doe" required/>
-                </div>
+            
                 <div class="field">
                     <p>Email: </p>
                     <input id="email" type="email" name="email" placeholder="yourname@mail.com" required/>

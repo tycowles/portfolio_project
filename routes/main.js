@@ -4,8 +4,6 @@ const router = express.Router();
 
 var data = {companyName: "Uni-Helper"}
 
-
-// Handle the routes
 router.get('/',(req,res) => {
     res.render('index.ejs')
  });
@@ -21,16 +19,29 @@ router.get('/about',function(req,res){
 router.get('/addProduct', function (req,res) {
     res.render('addProduct.ejs', data);                                                                     
 }); 
+
+router.get('/searchProduct', function (req,res) {
+    res.render('searchProduct.ejs', data);                                                                     
+}); 
   
 router.get('/showProduct', function (req,res) {
-    res.render('showProduct.ejs', data);                                                                     
+    let sqlquery2 = "SELECT * FROM categories";
+    db.query(sqlquery2, (err, results) => {
+        if (err) {
+            return console.error(err.message);
+        } else {
+            let newData = Object.assign({}, data, {display:false}, {category:results});
+            res.render("showProduct.ejs", newData);
+        }
+        
+    });                                                                      
 }); 
   
 router.post('/registered', function (req,res) {
     // saving data in database
-    let sqlquery = "INSERT INTO users (email, password) VALUES (?,?)";
+    let sqlquery = "INSERT INTO users (name, email, password) VALUES (?, ?,?)";
     // execute sql query
-    let newrecord = [req.body.email, req.body.password];
+    let newrecord = [req.body.name, req.body.email, req.body.password];
     db.query(sqlquery, newrecord, (err, result) => {
     if (err) {
         return console.error(err.message);
@@ -58,33 +69,39 @@ router.post('/loggedin', function (req,res) {
     // execute sql query
     let newrecord = [req.body.email];
     db.query(sqlquery, newrecord, (err, result) => {
-      if (err) {
-          return console.error(err.message);
-      }
-      else {
-        if (result.length != 0 && result[0].password == req.body.password) {
-          res.redirect("/showPage?user_id=" + result[0].id);
+        if (err) {
+            return console.error(err.message);
         }
         else {
-          res.redirect("/retrylogin");
-        } 
-      }
+            if (result.length != 0 && result[0].password == req.body.password) {
+            res.redirect("/showPage?user_id=" + result[0].user_id + "&name=" + result[0].name);
+            }
+            else {
+            res.redirect("/retrylogin");
+            } 
+        }
     });
 }); 
 
 router.get('/showPage', function (req,res) {
     
     let sqlquery2 = "SELECT * FROM products WHERE user_id = ?";
-    // execute sql query
-    console.log(req.query.user_id);
     let keyword = [req.query.user_id];
 
     db.query(sqlquery2, keyword, (err, books) => {
         if (err) {
             res.redirect('./'); 
         } else {
-            let newData = Object.assign({}, data, {user_id:req.query.user_id}, {products:books});
-            res.render("loggedin.ejs", newData);
+            let sqlquery2 = "SELECT * FROM categories";
+            db.query(sqlquery2, (err, results) => {
+                if (err) {
+                    return console.error(err.message);
+                } else {
+                    let newData = Object.assign({}, data, {user_id:req.query.user_id}, {products:books}, {display:false}, {category:results});
+                    res.render("loggedin.ejs", newData);
+                }
+                
+            });             
         }
     });                                                            
 }); 
@@ -93,62 +110,83 @@ router.get('/showPage', function (req,res) {
 
 
 router.post('/productadded', function (req,res) {
-    // saving data in database
-    let sqlquery = "INSERT INTO products (user_id, name, price) VALUES (?,?,?)";
-    // execute sql query
-    let newrecord = [req.body.user_id, req.body.name, req.body.price];
+    let sqlquery = "INSERT INTO products (name, description, price, user_id, cat_id) VALUES (?,?,?,?,?)";
+    let newrecord = [req.body.name, req.body.description, req.body.price, req.body.user_id, req.body.category];
     db.query(sqlquery, newrecord, (err, result) => {
-      if (err) {
-        return console.error(err.message);
-      }
-      else {
-        console.log("success!");
-        res.redirect("/showPage?user_id=" + req.body.user_id);
-      }
+        if (err) {
+            return console.error(err.message);
+        }
+        else {
+            console.log("success!");
+            res.redirect("/showPage?user_id=" + req.body.user_id);
+        }
+    });
+}); 
+
+router.post('/deleteProduct', function (req,res) {
+    // saving data in database
+    let sqlquery = "DELETE FROM products WHERE product_id = ?;";
+    // execute sql query
+    let newrecord = [req.body.product_id];
+    db.query(sqlquery, newrecord, (err, result) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        else {
+            console.log("success!");
+            res.redirect("/showPage?user_id=" + req.body.user_id);
+        }
     });
 }); 
   
-  router.get('/search-result', function (req,res) {
-      // saving data in database
-      let sqlquery = "SELECT * FROM books WHERE name = ?";
-      // execute sql query
-      let keyword = [req.query.keyword];
-      console.log(req.query.keyword);
-  
-      db.query(sqlquery, keyword, (err, result) => {
+router.get('/search-result', function (req,res) {
+    // saving data in database
+    let sqlquery = "SELECT * FROM books WHERE name = ?";
+    // execute sql query
+    let keyword = [req.query.keyword];
+    console.log(req.query.keyword);
+
+    db.query(sqlquery, keyword, (err, result) => {
         if (err) {
-          return console.error(err.message);
+            return console.error(err.message);
         }
         else {
-          res.send(' We do have this book, name: '
+            res.send(' We do have this book, name: '
                     + result[0].name + ' price '+ result[0].price);
         }
-      });
-  }); 
-  
-  router.get('/showResult', function (req,res) {
-    // saving data in database
-    let sqlquery = "SELECT * FROM products WHERE user_id = ?";
-    // execute sql query
-    let keyword = [req.query.user_id];
-    console.log(req.query.keyword);
-  
-    db.query(sqlquery, keyword, (err, result) => {
-      if (err) {
-        res.redirect('./'); 
-      }
-      //res.send(result)
-      let newData = Object.assign({}, data, {products:result});
-        console.log(newData)
-        res.render("showResult.ejs", newData)
     });
-  });
+}); 
+  
+router.get('/showResult', function (req,res) {
+
+    let sqlquery2 = "SELECT * FROM categories";
+    db.query(sqlquery2, (err, results) => {
+        if (err) {
+            return console.error(err.message);
+        } else {
+
+            let sqlquery = "SELECT * FROM products WHERE cat_id = ?";
+            // execute sql query
+            let keyword = [req.query.category];
+
+            db.query(sqlquery, keyword, (err, products) => {
+                if (err) {
+                    res.redirect('./'); 
+                }
+                console.log(products);
+                let newData = Object.assign({}, data, {display:true}, {category:results}, {product:products});
+                res.render("showProduct.ejs", newData);
+            });
+
+            
+        }
+        
+    });
+});
 
 router.get('*', (req, res) => {
     res.status(404).send("<div>404 Not Found</div>");
 });
-
-
 
 // Export the router object so index.js can access it
 module.exports = router;

@@ -1,48 +1,51 @@
 <!doctype html>
 <html>
-  <head>
-    <title>About Portfolio</title>
-    <link rel="stylesheet"  type="text/css" href="/main.css" />
-    <style type="text/css">
-            
-      h1 {
-        justify-content: center;
-        width: auto;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-      }
-      .about {
-            margin-left: auto;
-            margin-right: auto;
-            justify-content: center;
-            background-color: rgb(235, 235, 235);
-            width: 75%;
-            align-items: center;
-            padding: 50px;
-            margin-top: 100px;
-            border-radius: 2rem;
-            text-align: center;
-            min-height: 100%;
-            margin-bottom: 10%;
-        }
-    </style>
-  </head>
-  <body>
-    <%- include('index.ejs') %>
-    <h1>Welcome to <%=companyName %>!</h1>
-    <div class="about">
-    <p>We hope to make the goods needed during university more affordable.
-       We are a group of college students that saw the waste of each univ
-       students buying the same items each year and throwing them away 
-       at the end of the year. We wanted to do something about this uneeded 
-       waste! We connect university students with older students selling or 
-       donating their uneeded or unused goods. This makes it more affordable 
-       for incoming students and allows previous students to make a dollar or
-       not have their throw their perfectly good items away.      </p>
-    </div>
+    <head>
+        <title>About Portfolio</title>
+        <style type="text/css">
+                
+            h1 {
+                justify-content: center;
+                width: auto;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+            .about {
+                margin-left: auto;
+                margin-right: auto;
+                justify-content: center;
+                background-color: rgb(235, 235, 235);
+                width: 75%;
+                align-items: center;
+                padding: 50px;
+                margin-top: 100px;
+                border-radius: 2rem;
+                text-align: center;
+                min-height: 100%;
+                margin-bottom: 10%;
+            }
+        </style>
+    </head>
+    <body>
 
-    <%- include('footer.ejs') %>
-    
-  </body>
+        <%- include('index.ejs') %>
+        
+        <h1>Welcome to <%=companyName %>!</h1>
+        <div class="about">
+            <p>
+                We hope to make the goods needed during university more affordable.
+                We are a group of college students that saw the waste of each univ
+                students buying the same items each year and throwing them away 
+                at the end of the year. We wanted to do something about this uneeded 
+                waste! We connect university students with older students selling or 
+                donating their uneeded or unused goods. This makes it more affordable 
+                for incoming students and allows previous students to make a dollar or
+                not have their throw their perfectly good items away.      
+            </p>
+        </div>
+
+        <%- include('footer.ejs') %>
+        
+    </body>
 </html>
