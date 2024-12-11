@@ -74,7 +74,7 @@ router.post('/loggedin', function (req,res) {
         }
         else {
             if (result.length != 0 && result[0].password == req.body.password) {
-            res.redirect("/showPage?user_id=" + result[0].user_id + "&name=" + result[0].name);
+            res.redirect("showPage?user_id=" + result[0].user_id + "&name=" + result[0].name);
             }
             else {
             res.redirect("/retrylogin");

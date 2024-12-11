@@ -10,9 +10,14 @@ const port = 8000
 // Define the database connection
 const db = mysql.createConnection ({
     host: 'localhost',
-    user: 'uni_helper_app',
+    user: 'portfolio_app',
     password: 'qwertyuiop',
-    database: 'uni_helper'
+    database: 'portfolio'
+
+    // host: 'localhost',
+    // user: 'uni_helper_app',
+    // password: 'qwertyuiop',
+    // database: 'uni_helper'
 });
 
 // Connect to the database
