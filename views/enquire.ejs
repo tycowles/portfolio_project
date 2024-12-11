@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Search <%=companyName %></title>
+        <style type="text/css">
+            .content {
+                margin-left: auto;
+                margin-right: auto;
+                justify-content: center;
+                background-color: rgb(235, 235, 235);
+                width: 500px;
+                align-items: center;
+                padding: 50px;
+                margin-top: 100px;
+                border-radius: 2rem;
+                text-align: center;
+                margin-bottom: 10%;
+            }
+            table {
+                margin-top: 30px;
+                border-collapse: collapse;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+                background-color: rgb(255, 255, 255);
+            }
+
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(odd) {
+                background-color: #888888;
+            }
+
+            .plain {
+                font-weight: 100;
+            }
+
+            .contact {
+                font-weight: 100;
+                background-color: rgb(255, 255, 255);
+                margin-top: 30px;
+                padding: 15px;
+            }
+
+            .back {
+                text-align: center;
+                padding: 5px 5px;
+                font-size: 15px;
+                background: #aeaeae;
+                border-radius: 2rem; 
+                width: 150px;
+                text-decoration: none;
+                color: #000000;
+            }
+
+            .back:hover {
+                text-align: center;
+                padding: 5px 5px;
+                font-size: 15px;
+                background: #8bbfd7;
+                border-radius: 2rem; 
+                width: 150px;
+                text-decoration: none;
+                color: #000000;
+                display: flex;
+            }
+
+        </style>
+    </head>
+    <body>
+        <%- include('index.ejs') %>
+        <div class="content">
+            
+            <table>
+                <% if (product.length != 0) { %>
+                    <% for(let i = 0; i < product.length; i++) { %>
+                        <tr>
+                            <th><%= product[i].name %></th>
+                            <th class="plain"><%= product[i].description %></th>
+                            <th>$<%= product[i].price %></th>                   
+                        </tr>
+
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <th>This listing is no longer available.</th>
+                    </tr>
+                <% } %>
+            </table>
+            <div class="contact">
+                Contact this email address to enquire for the product: <strong><%= product[0].email %></strong> 
+            </div>
+            <div class="back">
+                <a href="showResult?category=<%= cat_id%>">Back</a>
+            </div>
+
+        </div>
+
+        <%- include('footer.ejs') %>
+    </body>
+</html>

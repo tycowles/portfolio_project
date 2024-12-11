@@ -174,13 +174,31 @@ router.get('/showResult', function (req,res) {
                     res.redirect('./'); 
                 }
                 console.log(products);
-                let newData = Object.assign({}, data, {display:true}, {category:results}, {product:products});
+                console.log(results[req.query.category - 1].name)
+                let newData = Object.assign({}, data, {display:true}, {category:results}, {product:products}, {searchCat:results[req.query.category - 1].name}, {cat_id:req.query.category});
                 res.render("showProduct.ejs", newData);
             });
 
             
         }
         
+    });
+});
+
+router.get('/enquire', function (req,res) {
+    let sqlquery = "SELECT p.name, p.description, p.price, u.email FROM products p LEFT JOIN users u ON p.user_id = u.user_id WHERE p.product_id = ?";
+    // execute sql query
+    let keyword = [req.query.product_id];
+
+    db.query(sqlquery, keyword, (err, result) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        else {
+            console.log(result);
+            let newData = Object.assign({}, data, {product:result}, {cat_id:req.query.cat_id});
+            res.render("enquire.ejs", newData);
+        }
     });
 });
 

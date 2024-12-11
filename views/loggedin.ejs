@@ -107,14 +107,14 @@
     <div class="content">
         <h2>Your current listings: </h2>
         <table>
-            <tr>
-                <th >Product Name</th>
-                <th >Price</th>
-                </tr>
             <% if (products.length == 0) { %>
                 <h2>You have no products listed</h2>
             <% } else { %>
-                    <% for(let i = 0; i < products.length; i++) { %>
+                <tr>
+                    <th >Product Name</th>
+                    <th >Price</th>
+                </tr>
+                <% for(let i = 0; i < products.length; i++) { %>
                     <tr>
                         <th><%= products[i].name %></th>
                         <th>$<%= products[i].price %></th>
@@ -125,8 +125,7 @@
                                 <input type="submit" value="Delete" >
                             </form>
                         </th>
-                    </tr>
-                
+                    </tr>           
             <% }} %> 
         </table>
           
