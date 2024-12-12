@@ -56,6 +56,7 @@
         </style>
     </head>
     <body>
+        <!-- load header -->
         <%- include('index.ejs') %>
         <div class="form"> 
             <h2>Log into your account</h2>
@@ -63,12 +64,14 @@
             <div>Login in to add your own listings.</div>
 
             <div class="content">
+                <!-- if unsuccessful attempt display error -->
                 <div class="error_message">
                     <% if (repeat) { %>
                         <p>Your email or password was incorrect. Please try again.</p>
                     <% } %>
                 </div>
                 <div class="forminput">
+                    <!-- form to input credentials -->
                     <form method="POST" action="/loggedin">
                             <div class="field">
                                 <p>Email: </p>
@@ -87,14 +90,15 @@
                         </form>
                 </div>
 
+                <!-- link to register for new users -->
                 <a href="register">Don't have an account?</a>
 
                 <br><br>
-
+                <!-- logs in as demo account to show functionality -->
                 <a href="showPage?user_id=1">Demo Account</a>
             </div>
         </div>
-
+        <!-- load footer -->
         <%- include('footer.ejs') %>
         
     </body>

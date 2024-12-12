@@ -94,11 +94,12 @@
         </style>
     </head>
     <body>
-
+    <!-- unique header while logged in -->
     <header>
         <div class="logo">
             <%=companyName%>
         </div>
+        <!-- logout/ return home button -->
         <div class="navbar">
             <a href="login">Log Out</a>    
         </div>
@@ -107,6 +108,7 @@
     <div class="content">
         <h2>Your current listings: </h2>
         <table>
+            <!-- conditional check to load products -->
             <% if (products.length == 0) { %>
                 <h2>You have no products listed</h2>
             <% } else { %>
@@ -114,6 +116,7 @@
                     <th >Product Name</th>
                     <th >Price</th>
                 </tr>
+                <!-- display each of the listings the user has -->
                 <% for(let i = 0; i < products.length; i++) { %>
                     <tr>
                         <th><%= products[i].name %></th>
@@ -128,9 +131,10 @@
                     </tr>           
             <% }} %> 
         </table>
-          
+        <!-- form to add new listings -->
         <div class="form">
             <h1>Student swap shop: Add product</h1>
+            <!-- insert listing details -->
             <form action="/productadded" method="POST">
                 <p> <input id="user_id" type="text" name="user_id" value="<%=user_id%>" hidden></p>
                 <div class="field">
@@ -157,7 +161,7 @@
             </form>
         </div>
     </div>
-
+    <!-- load footer -->
     <%- include('footer.ejs') %>
         
   </body>

@@ -73,10 +73,12 @@
         </style>
     </head>
     <body>
+        <!-- Loads header -->
         <%- include('index.ejs') %>
         <div class="content">
-            
+            <!-- displays product information and contact information -->
             <table>
+                <!-- conditional check that product exists -->
                 <% if (product.length != 0) { %>
                     <% for(let i = 0; i < product.length; i++) { %>
                         <tr>
@@ -95,12 +97,13 @@
             <div class="contact">
                 Contact this email address to enquire for the product: <strong><%= product[0].email %></strong> 
             </div>
+            <!-- return to search -->
             <div class="back">
                 <a href="showResult?category=<%= cat_id%>">Back</a>
             </div>
 
         </div>
-
+        <!-- load footer -->
         <%- include('footer.ejs') %>
     </body>
 </html>

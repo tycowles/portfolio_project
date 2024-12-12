@@ -95,33 +95,38 @@
     </style>
     </head>
     <body>
+        <!-- load footer -->
         <%- include('index.ejs') %>
         <div class="form">
+            <!-- search form to search by subject -->
             <h2>Search <%=companyName %></h2>
             <div class="forminput">
                 <form action="/showResult" method="GET">
                     <div class="field">
                         <p>Search: </p> 
                         <select name="category" id="category">
-                        <% for(let i = 0; i < category.length; i++) { %>
-                            <option name="cat_id" id="cat_id" value="<%= category[i].cat_id %>"><%= category[i].name %></option>
-                    
-                        <% } %> 
+                            <!-- load search categories from db -->
+                            <% for(let i = 0; i < category.length; i++) { %>
+                                <option name="cat_id" id="cat_id" value="<%= category[i].cat_id %>"><%= category[i].name %></option>
+                        
+                            <% } %> 
                         </select>
                     </div>
                     <input type="submit" value="Search" >
                 </form>
-
+                <!-- link to login to add new listing -->
                 <a href="login">Add your own listings.</a>
 
             </div>
-
+            <!-- if a category is selected display listings -->
             <% if (display) { %>
                 <table>
                     <tr>
                         <th>Search results for: <%= searchCat %></th>
                     </tr>
+                    <!-- check if there are any listings for specific category -->
                     <% if (product.length != 0) { %>
+                        <!-- if listings load all in the category onto page -->
                         <% for(let i = 0; i < product.length; i++) { %>
                             <tr>
                                 <th><%= product[i].name %></th>
@@ -132,6 +137,7 @@
                             </tr>
                         <% } %>
                     <% } else { %>
+                        <!-- if no listings load none -->
                         <tr>
                             <th>There are no current listings for <%= searchCat %></th>
                         </tr>
@@ -140,7 +146,7 @@
             <% } %>
                
         </div>
-
+        <!-- load footer -->
         <%- include('footer.ejs') %>
     </body>
 </html>

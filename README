@@ -1,1 +1,11 @@
-This is the readme for my portfolio project
+Welcome to my portfolio project.
+
+To run this application on your local computer clone the repository from github.
+Run npm install to install the dependencies for this application.
+Ensure that MySQL in installed on your device and open it up in terminal.
+Execute create_db.sql and then insert_data.sql to set up the database for the app.
+
+Once that is complete you should be ready to run the application locally. Execute
+node index.js to start the application and the app should be live on localhost:8000
+
+Your app should be up and running now.
