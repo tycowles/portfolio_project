@@ -5,7 +5,7 @@ const router = express.Router();
 var data = {companyName: "Uni-Helper"}
 
 router.get('/',(req,res) => {
-    res.render('index.ejs')
+    res.render('home.ejs', data)
  });
 
 router.get('/about',function(req,res){
@@ -38,17 +38,14 @@ router.get('/showProduct', function (req,res) {
 }); 
   
 router.post('/registered', function (req,res) {
-    // saving data in database
     let sqlquery = "INSERT INTO users (name, email, password) VALUES (?, ?,?)";
-    // execute sql query
     let newrecord = [req.body.name, req.body.email, req.body.password];
     db.query(sqlquery, newrecord, (err, result) => {
     if (err) {
         return console.error(err.message);
     }
     else {
-        res.send(' This user is added to database, email: '
-                + req.body.email);
+        res.redirect("login");
     }
     });
 }); 
@@ -64,9 +61,7 @@ router.get('/retrylogin',(req,res) => {
 });
 
 router.post('/loggedin', function (req,res) {
-    // saving data in database
     let sqlquery = "SELECT * FROM users WHERE email = ?";
-    // execute sql query
     let newrecord = [req.body.email];
     db.query(sqlquery, newrecord, (err, result) => {
         if (err) {
@@ -77,7 +72,7 @@ router.post('/loggedin', function (req,res) {
             res.redirect("showPage?user_id=" + result[0].user_id + "&name=" + result[0].name);
             }
             else {
-            res.redirect("/retrylogin");
+            res.redirect("retrylogin");
             } 
         }
     });
@@ -124,9 +119,7 @@ router.post('/productadded', function (req,res) {
 }); 
 
 router.post('/deleteProduct', function (req,res) {
-    // saving data in database
     let sqlquery = "DELETE FROM products WHERE product_id = ?;";
-    // execute sql query
     let newrecord = [req.body.product_id];
     db.query(sqlquery, newrecord, (err, result) => {
         if (err) {
@@ -138,24 +131,7 @@ router.post('/deleteProduct', function (req,res) {
         }
     });
 }); 
-  
-router.get('/search-result', function (req,res) {
-    // saving data in database
-    let sqlquery = "SELECT * FROM books WHERE name = ?";
-    // execute sql query
-    let keyword = [req.query.keyword];
-    console.log(req.query.keyword);
 
-    db.query(sqlquery, keyword, (err, result) => {
-        if (err) {
-            return console.error(err.message);
-        }
-        else {
-            res.send(' We do have this book, name: '
-                    + result[0].name + ' price '+ result[0].price);
-        }
-    });
-}); 
   
 router.get('/showResult', function (req,res) {
 
@@ -166,7 +142,6 @@ router.get('/showResult', function (req,res) {
         } else {
 
             let sqlquery = "SELECT * FROM products WHERE cat_id = ?";
-            // execute sql query
             let keyword = [req.query.category];
 
             db.query(sqlquery, keyword, (err, products) => {
@@ -187,7 +162,6 @@ router.get('/showResult', function (req,res) {
 
 router.get('/enquire', function (req,res) {
     let sqlquery = "SELECT p.name, p.description, p.price, u.email FROM products p LEFT JOIN users u ON p.user_id = u.user_id WHERE p.product_id = ?";
-    // execute sql query
     let keyword = [req.query.product_id];
 
     db.query(sqlquery, keyword, (err, result) => {

@@ -26,7 +26,6 @@
                 margin-left: auto;
                 margin-right: auto;
                 justify-content: center;
-                /* background-color: rgb(2, 2, 2); */
                 align-items: center;
                 
             }
@@ -60,32 +59,38 @@
         <%- include('index.ejs') %>
         <div class="form"> 
             <h2>Log into your account</h2>
+
+            <div>Login in to add your own listings.</div>
+
             <div class="content">
-            <div class="error_message">
-                <% if (repeat) { %>
-                    <p>Your email or password was incorrect. Please try again.</p>
-                <% } %>
-            </div>
-            <div class="forminput">
-                <form method="POST" action="/loggedin">
-                        <div class="field">
-                            <p>Email: </p>
-                            <input id="email" type="email" name="email" placeholder="yourname@mail.com" required/>
-                        </div>
-
-                        <div class="field">
-                            <p>Password: </p>
-                            <input id="password" type="password" name="password" placeholder="********" required/>
-                        </div>
-
-                        <div class="submit">
-                            <input type="submit" value="Log In" />
-                        </div>
-                    
-                </form>
+                <div class="error_message">
+                    <% if (repeat) { %>
+                        <p>Your email or password was incorrect. Please try again.</p>
+                    <% } %>
                 </div>
+                <div class="forminput">
+                    <form method="POST" action="/loggedin">
+                            <div class="field">
+                                <p>Email: </p>
+                                <input id="email" type="email" name="email" placeholder="yourname@mail.com" required/>
+                            </div>
+
+                            <div class="field">
+                                <p>Password: </p>
+                                <input id="password" type="password" name="password" placeholder="********" required/>
+                            </div>
+
+                            <div class="submit">
+                                <input type="submit" value="Log In" />
+                            </div>
+                        
+                        </form>
+                </div>
+
                 <a href="register">Don't have an account?</a>
+
                 <br><br>
+
                 <a href="showPage?user_id=1">Lazy Login</a>
             </div>
         </div>
