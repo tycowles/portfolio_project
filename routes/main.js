@@ -113,7 +113,7 @@ router.post('/productadded', function (req,res) {
         }
         else {
             console.log("success!");
-            res.redirect("/showPage?user_id=" + req.body.user_id);
+            res.redirect("showPage?user_id=" + req.body.user_id);
         }
     });
 }); 
@@ -127,7 +127,7 @@ router.post('/deleteProduct', function (req,res) {
         }
         else {
             console.log("success!");
-            res.redirect("/showPage?user_id=" + req.body.user_id);
+            res.redirect("showPage?user_id=" + req.body.user_id);
         }
     });
 }); 
