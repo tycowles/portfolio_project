@@ -6,7 +6,7 @@ USE uni_helper;
 
 # Create the tables
 CREATE TABLE IF NOT EXISTS users (user_id INT AUTO_INCREMENT,name VARCHAR(50), email VARCHAR(50), password VARCHAR(50), PRIMARY KEY(user_id));
-CREATE TABLE IF NOT EXISTS products (product_id INT AUTO_INCREMENT,name VARCHAR(50), description VARCHAR(500), price DECIMAL(6, 2) unsigned, user_id INT, cat_id INT, PRIMARY KEY(product_id));
+CREATE TABLE IF NOT EXISTS products (product_id INT AUTO_INCREMENT,name VARCHAR(50), description VARCHAR(500), price DECIMAL(6, 2) unsigned, user_id INT, cat_id INT, PRIMARY KEY(product_id), FOREIGN KEY(user_id) REFERENCES users(user_id), FOREIGN KEY(cat_id) REFERENCES categories(cat_id));
 CREATE TABLE IF NOT EXISTS categories (cat_id INT AUTO_INCREMENT,name VARCHAR(50), PRIMARY KEY(cat_id));
 
 
